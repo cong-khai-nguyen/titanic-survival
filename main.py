@@ -11,3 +11,4 @@ for dirpath, _, file_names in os.walk("data/"):
 
 
 training = pd.read_csv('data/train.csv')
+test = pd.read_csv('data/test.csv')
