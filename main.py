@@ -51,3 +51,10 @@ print()
 print(pd.pivot_table(training, index = 'Survived', columns='Pclass', values="Ticket", aggfunc='count'), "\n")
 print(pd.pivot_table(training, index = 'Survived', columns='Sex', values="Ticket", aggfunc='count'), "\n")
 print(pd.pivot_table(training, index = 'Survived', columns='Embarked', values="Ticket", aggfunc='count'), "\n")
+
+# Preprocess training set: simplify Cabin column
+# if that passenger has missing value for cabin then their cabin # is 0
+# if that passenger has multiple cabins then save exactly how many they got
+training['cabin_multiple'] = training.Cabin.apply(lambda x : 0 if pd.isna(x) else len(x.split(' ')))
+# Vast majority don't have a cabin - implicating lots of missing values
+print(training['cabin_multiple'].value_counts())
