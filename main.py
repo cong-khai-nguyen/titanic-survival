@@ -41,8 +41,13 @@ df_cat = training[['Survived','Pclass','Sex','Ticket','Cabin','Embarked']]
 
 # compare survival rate across Age, SibSp, Parch, and Fare
 print(pd.pivot_table(training, index = 'Survived', values = ['Age','SibSp','Parch','Fare']))
-
+print()
 # Look at the categorical data
-for i in df_cat.columns:
-    sns.barplot(df_cat[i].value_counts().index, df_cat[i].value_counts()).set_title(i)
-    plt.show()
+# for i in df_cat.columns:
+#     sns.barplot(df_cat[i].value_counts().index, df_cat[i].value_counts()).set_title(i)
+#     plt.show()
+
+# compare survival and each of the categorical variables
+print(pd.pivot_table(training, index = 'Survived', columns='Pclass', values="Ticket", aggfunc='count'), "\n")
+print(pd.pivot_table(training, index = 'Survived', columns='Sex', values="Ticket", aggfunc='count'), "\n")
+print(pd.pivot_table(training, index = 'Survived', columns='Embarked', values="Ticket", aggfunc='count'), "\n")
