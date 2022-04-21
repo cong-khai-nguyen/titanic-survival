@@ -71,4 +71,12 @@ training['numeric_ticket'] = training.Ticket.apply(lambda x: 1 if x.isnumeric() 
 training['ticket_letters'] = training.Ticket.apply(lambda x: ''.join(x.split(' ')[:-1]).replace('.','').replace('/','').lower() if len(x.split(' ')[:-1]) >0 else 0)
 
 
-print(training['ticket_letters'].value_counts())
+# print(training['ticket_letters'].value_counts())
+
+# difference of survival in numeric vs non-numeric tickets in survival rate
+# print(pd.pivot_table(training, index="Survived", columns='numeric_ticket', values='Ticket', aggfunc='count'))
+
+# survival rate across different ticket types
+# See no significance
+print(pd.pivot_table(training,index='Survived',columns='ticket_letters', values = 'Ticket', aggfunc='count'))
+
