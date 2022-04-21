@@ -84,3 +84,6 @@ print(pd.pivot_table(training,index='Survived',columns='ticket_letters', values 
 print(training.Name.head(5))
 training['name_title'] = training.Name.apply(lambda x: x.split(",")[1].split(".")[0].strip())
 print(training['name_title'].value_counts())
+
+all_data.dropna(subset=['Embarked'],inplace = True)
+
