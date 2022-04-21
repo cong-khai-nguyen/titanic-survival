@@ -59,6 +59,7 @@ training['cabin_multiple'] = training.Cabin.apply(lambda x : 0 if pd.isna(x) els
 # Vast majority don't have a cabin - implicating lots of missing values
 # print(training['cabin_multiple'].value_counts())
 
+# create categories based on the cabin letter
 training['cabin_adv'] = training.Cabin.apply(lambda x: str(x)[0])
 # print(training.cabin_adv.value_counts())
 #comparing surivial rate by cabin
