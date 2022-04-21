@@ -80,3 +80,7 @@ training['ticket_letters'] = training.Ticket.apply(lambda x: ''.join(x.split(' '
 # See no significance
 print(pd.pivot_table(training,index='Survived',columns='ticket_letters', values = 'Ticket', aggfunc='count'))
 
+# preprocess the name of each person on board to get the number of females and males
+print(training.Name.head(5))
+training['name_title'] = training.Name.apply(lambda x: x.split(",")[1].split(".")[0].strip())
+print(training['name_title'].value_counts())
