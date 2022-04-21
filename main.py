@@ -63,4 +63,12 @@ training['cabin_multiple'] = training.Cabin.apply(lambda x : 0 if pd.isna(x) els
 training['cabin_adv'] = training.Cabin.apply(lambda x: str(x)[0])
 # print(training.cabin_adv.value_counts())
 #comparing surivial rate by cabin
-print(pd.pivot_table(training,index='Survived',columns='cabin_adv', values = 'Name', aggfunc='count'))
+# print(pd.pivot_table(training,index='Survived',columns='cabin_adv', values = 'Name', aggfunc='count'))
+
+#understand ticket values better
+#numeric vs non numeric
+training['numeric_ticket'] = training.Ticket.apply(lambda x: 1 if x.isnumeric() else 0)
+training['ticket_letters'] = training.Ticket.apply(lambda x: ''.join(x.split(' ')[:-1]).replace('.','').replace('/','').lower() if len(x.split(' ')[:-1]) >0 else 0)
+
+
+print(training['ticket_letters'].value_counts())
