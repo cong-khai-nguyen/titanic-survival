@@ -93,3 +93,9 @@ all_data['cabin_adv'] = all_data.Cabin.apply(lambda x: str(x)[0])
 all_data['numeric_ticket'] = all_data.Ticket.apply(lambda x: 1 if x.isnumeric() else 0)
 all_data['ticket_letters'] = all_data.Ticket.apply(lambda x: ''.join(x.split(' ')[:-1]).replace('.','').replace('/','').lower() if len(x.split(' ')[:-1]) >0 else 0)
 all_data['name_title'] = all_data.Name.apply(lambda x: x.split(',')[1].split('.')[0].strip())
+
+#impute nulls for continuous data
+#all_data.Age = all_data.Age.fillna(training.Age.mean())
+all_data.Age = all_data.Age.fillna(training.Age.median())
+#all_data.Fare = all_data.Fare.fillna(training.Fare.mean())
+all_data.Fare = all_data.Fare.fillna(training.Fare.median())
