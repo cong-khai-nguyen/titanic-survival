@@ -57,4 +57,9 @@ print(pd.pivot_table(training, index = 'Survived', columns='Embarked', values="T
 # if that passenger has multiple cabins then save exactly how many they got
 training['cabin_multiple'] = training.Cabin.apply(lambda x : 0 if pd.isna(x) else len(x.split(' ')))
 # Vast majority don't have a cabin - implicating lots of missing values
-print(training['cabin_multiple'].value_counts())
+# print(training['cabin_multiple'].value_counts())
+
+training['cabin_adv'] = training.Cabin.apply(lambda x: str(x)[0])
+# print(training.cabin_adv.value_counts())
+#comparing surivial rate by cabin
+print(pd.pivot_table(training,index='Survived',columns='cabin_adv', values = 'Name', aggfunc='count'))
