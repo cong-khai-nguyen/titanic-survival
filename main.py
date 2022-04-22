@@ -3,6 +3,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import os
+from sklearn.preprocessing import StandardScaler
 
 # Finding the path to file
 for dirpath, _, file_names in os.walk("data/"):
@@ -124,3 +125,9 @@ x_train = all_dummies[all_dummies.train_test == 1].drop(['train_test'], axis =1)
 x_test = all_dummies[all_dummies.train_test == 0].drop(['train_test'], axis =1)
 y_train = all_data[all_data.train_test==1].Survived
 print(y_train.shape)
+
+# Scale data
+scale = StandardScaler()
+all_dummies_scaled = all_dummies.copy()
+all_dummies_scaled[['Age','SibSp','Parch','norm_fare']] = scale.fit_transform(all_dummies_scaled[['Age','SibSp','Parch','norm_fare']])
+print(all_dummies_scaled)
