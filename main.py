@@ -126,6 +126,7 @@ x_test = all_dummies[all_dummies.train_test == 0].drop(['train_test'], axis =1)
 y_train = all_data[all_data.train_test==1].Survived
 print(y_train.shape)
 
+
 # Scale data
 scale = StandardScaler()
 all_dummies_scaled = all_dummies.copy()
