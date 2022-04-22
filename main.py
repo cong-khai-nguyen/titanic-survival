@@ -127,8 +127,16 @@ y_train = all_data[all_data.train_test==1].Survived
 print(y_train.shape)
 
 
-# Scale data
+# Scale all the numerical variables to range [-1,1] using Standard Scaler
 scale = StandardScaler()
 all_dummies_scaled = all_dummies.copy()
 all_dummies_scaled[['Age','SibSp','Parch','norm_fare']] = scale.fit_transform(all_dummies_scaled[['Age','SibSp','Parch','norm_fare']])
 print(all_dummies_scaled)
+
+from sklearn.model_selection import cross_val_score
+from sklearn.naive_bayes import GaussianNB
+from sklearn.linear_model import LogisticRegression
+from sklearn import tree
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
