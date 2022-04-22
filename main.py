@@ -132,6 +132,8 @@ scale = StandardScaler()
 all_dummies_scaled = all_dummies.copy()
 all_dummies_scaled[['Age','SibSp','Parch','norm_fare']] = scale.fit_transform(all_dummies_scaled[['Age','SibSp','Parch','norm_fare']])
 print(all_dummies_scaled)
+x_train_scaled = all_dummies_scaled[all_dummies_scaled.train_test == 1].drop(['train_test'], axis =1)
+x_test_scaled = all_dummies_scaled[all_dummies_scaled.train_test == 0].drop(['train_test'], axis =1)
 
 from sklearn.model_selection import cross_val_score
 from sklearn.naive_bayes import GaussianNB
@@ -140,3 +142,9 @@ from sklearn import tree
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
+
+# Naive Bayes
+gnb = GaussianNB()
+cv = cross_val_score(gnb,x_train_scaled,y_train,cv=5)
+print(cv)
+print(cv.mean())
