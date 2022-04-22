@@ -85,6 +85,7 @@ print(training.Name.head(5))
 training['name_title'] = training.Name.apply(lambda x: x.split(",")[1].split(".")[0].strip())
 print(training['name_title'].value_counts())
 
+# drop rows with missing value in 'embarked'. Only two instances of this in training and 0 in test data
 all_data.dropna(subset=['Embarked'],inplace = True)
 
 #create all categorical variables that we did above for both training and test sets
@@ -99,3 +100,13 @@ all_data['name_title'] = all_data.Name.apply(lambda x: x.split(',')[1].split('.'
 all_data.Age = all_data.Age.fillna(training.Age.median())
 #all_data.Fare = all_data.Fare.fillna(training.Fare.mean())
 all_data.Fare = all_data.Fare.fillna(training.Fare.median())
+
+# Tried log normalization of sibsp (Not Used since it is not closer to normal distribution)
+all_data['norm_sibsp'] = np.log(all_data.SibSp+1)
+all_data['norm_sibsp'].hist()
+# plt.show()
+
+# Tried log normalization of fare (Used)
+all_data['norm_fare'] = np.log(all_data.Fare+1)
+all_data['norm_fare'].hist()
+plt.show()
