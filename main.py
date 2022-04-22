@@ -109,4 +109,11 @@ all_data['norm_sibsp'].hist()
 # Tried log normalization of fare (Used)
 all_data['norm_fare'] = np.log(all_data.Fare+1)
 all_data['norm_fare'].hist()
-plt.show()
+# plt.show()
+
+all_data.Pclass = all_data.Pclass.astype(str)
+print(all_data.Pclass.head(10))
+
+
+# created dummy variables from categories
+all_dummies = pd.get_dummies(all_data[['Pclass','Sex','Age','SibSp','Parch','norm_fare','Embarked','cabin_adv','cabin_multiple','numeric_ticket','name_title','train_test']])
