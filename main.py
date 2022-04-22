@@ -117,3 +117,10 @@ print(all_data.Pclass.head(10))
 
 # created dummy variables from categories
 all_dummies = pd.get_dummies(all_data[['Pclass','Sex','Age','SibSp','Parch','norm_fare','Embarked','cabin_adv','cabin_multiple','numeric_ticket','name_title','train_test']])
+
+
+# Split to train and test data
+x_train = all_dummies[all_dummies.train_test == 1].drop(['train_test'], axis =1)
+x_test = all_dummies[all_dummies.train_test == 0].drop(['train_test'], axis =1)
+y_train = all_data[all_data.train_test==1].Survived
+print(y_train.shape)
