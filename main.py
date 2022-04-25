@@ -143,8 +143,14 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 
-# Naive Bayes
+# Naive Bayes (72.6%)
 gnb = GaussianNB()
 cv = cross_val_score(gnb,x_train_scaled,y_train,cv=5)
+print(cv)
+print(cv.mean())
+
+# Logistic Regression (82.1%)
+lr = LogisticRegression(max_iter = 2000)
+cv = cross_val_score(lr,x_train,y_train,cv=5)
 print(cv)
 print(cv.mean())
