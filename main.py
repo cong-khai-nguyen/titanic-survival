@@ -4,6 +4,15 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import os
 from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import cross_val_score
+from sklearn.naive_bayes import GaussianNB
+from sklearn.linear_model import LogisticRegression
+from sklearn import tree
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+from xgboost import XGBClassifier
+from sklearn.ensemble import VotingClassifier
 
 # Finding the path to file
 for dirpath, _, file_names in os.walk("data/"):
@@ -135,14 +144,6 @@ print(all_dummies_scaled)
 x_train_scaled = all_dummies_scaled[all_dummies_scaled.train_test == 1].drop(['train_test'], axis =1)
 x_test_scaled = all_dummies_scaled[all_dummies_scaled.train_test == 0].drop(['train_test'], axis =1)
 
-from sklearn.model_selection import cross_val_score
-from sklearn.naive_bayes import GaussianNB
-from sklearn.linear_model import LogisticRegression
-from sklearn import tree
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.svm import SVC
-from xgboost import XGBClassifier
 
 # Naive Bayes (72.6%)
 gnb = GaussianNB()
@@ -181,9 +182,13 @@ print(cv)
 print(cv.mean())
 
 # Xtreme Gradient Boosting (81.8%)
-# Soft Voting Classifier - All Models (82.8%)
-from xgboost import XGBClassifier
 xgb = XGBClassifier(random_state =1)
 cv = cross_val_score(xgb,x_train_scaled,y_train,cv=5)
+print(cv)
+print(cv.mean())
+
+# Soft Voting Classifier - All Models (82.8%)
+voting_clf = VotingClassifier(estimators = [('lr',lr),('knn',knn),('rf',rf),('gnb',gnb),('svc',svc),('xgb',xgb)], voting = 'soft')
+cv = cross_val_score(voting_clf,x_train_scaled,y_train,cv=5)
 print(cv)
 print(cv.mean())
