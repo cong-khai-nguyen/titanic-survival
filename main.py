@@ -142,6 +142,7 @@ from sklearn import tree
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
+from xgboost import XGBClassifier
 
 # Naive Bayes (72.6%)
 gnb = GaussianNB()
@@ -176,5 +177,13 @@ print(cv.mean())
 # Support Vector Classifier (83.2%)
 svc = SVC(probability = True)
 cv = cross_val_score(svc,x_train_scaled,y_train,cv=5)
+print(cv)
+print(cv.mean())
+
+# Xtreme Gradient Boosting (81.8%)
+# Soft Voting Classifier - All Models (82.8%)
+from xgboost import XGBClassifier
+xgb = XGBClassifier(random_state =1)
+cv = cross_val_score(xgb,x_train_scaled,y_train,cv=5)
 print(cv)
 print(cv.mean())
