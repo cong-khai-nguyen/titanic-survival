@@ -11,4 +11,7 @@ https://towardsdatascience.com/top-machine-learning-algorithms-for-classificatio
 
 https://monkeylearn.com/blog/classification-algorithms/
 
-https://www.youtube.com/watch?v=PiDfEo7qpcw&ab_channel=technologyCult (Standard Scaler)
+[Standard Scaler](https://www.youtube.com/watch?v=PiDfEo7qpcw&ab_channel=technologyCult)
+
+# Install and Run the Project
+This project requires to imported and installed libraries: pandas, numpy, seaborn, itertools, matplotlib, xgboost and scikit-learn.
