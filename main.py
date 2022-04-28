@@ -192,3 +192,24 @@ voting_clf = VotingClassifier(estimators = [('lr',lr),('knn',knn),('rf',rf),('gn
 cv = cross_val_score(voting_clf,x_train_scaled,y_train,cv=5)
 print(cv)
 print(cv.mean())
+
+
+from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import RandomizedSearchCV
+#simple performance reporting function
+def clf_performance(classifier, model_name):
+    print(model_name)
+    print('Best Score: ' + str(classifier.best_score_))
+    print('Best Parameters: ' + str(classifier.best_params_))
+
+lr = LogisticRegression()
+param_grid = {'max_iter' : [2000],
+              'penalty' : ['l1', 'l2'],
+              'C' : np.logspace(-4, 4, 20),
+              'solver' : ['liblinear']}
+
+clf_lr = GridSearchCV(lr, param_grid = param_grid, cv = 5, verbose = True, n_jobs = -1)
+best_clf_lr = clf_lr.fit(x_train_scaled,y_train)
+clf_performance(best_clf_lr,'Logistic Regression')
+
+
