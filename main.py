@@ -213,3 +213,11 @@ best_clf_lr = clf_lr.fit(x_train_scaled,y_train)
 clf_performance(best_clf_lr,'Logistic Regression')
 
 
+knn = KNeighborsClassifier()
+param_grid = {'n_neighbors' : [3,5,7,9],
+              'weights' : ['uniform', 'distance'],
+              'algorithm' : ['auto', 'ball_tree','kd_tree'],
+              'p' : [1,2]}
+clf_knn = GridSearchCV(knn, param_grid = param_grid, cv = 5, verbose = True, n_jobs = -1)
+best_clf_knn = clf_knn.fit(x_train_scaled,y_train)
+clf_performance(best_clf_knn,'KNN')
