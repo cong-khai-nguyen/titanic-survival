@@ -221,3 +221,13 @@ param_grid = {'n_neighbors' : [3,5,7,9],
 clf_knn = GridSearchCV(knn, param_grid = param_grid, cv = 5, verbose = True, n_jobs = -1)
 best_clf_knn = clf_knn.fit(x_train_scaled,y_train)
 clf_performance(best_clf_knn,'KNN')
+
+
+svc = SVC(probability = True)
+param_grid = tuned_parameters = [{'kernel': ['rbf'], 'gamma': [.1,.5,1,2,5,10],
+                                  'C': [.1, 1, 10, 100, 1000]},
+                                 {'kernel': ['linear'], 'C': [.1, 1, 10, 100, 1000]},
+                                 {'kernel': ['poly'], 'degree' : [2,3,4,5], 'C': [.1, 1, 10, 100, 1000]}]
+clf_svc = GridSearchCV(svc, param_grid = param_grid, cv = 5, verbose = True, n_jobs = -1)
+best_clf_svc = clf_svc.fit(x_train_scaled,y_train)
+clf_performance(best_clf_svc,'SVC')
