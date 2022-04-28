@@ -231,3 +231,22 @@ param_grid = tuned_parameters = [{'kernel': ['rbf'], 'gamma': [.1,.5,1,2,5,10],
 clf_svc = GridSearchCV(svc, param_grid = param_grid, cv = 5, verbose = True, n_jobs = -1)
 best_clf_svc = clf_svc.fit(x_train_scaled,y_train)
 clf_performance(best_clf_svc,'SVC')
+
+xgb = XGBClassifier(random_state = 1)
+
+param_grid = {
+    'n_estimators': [450,500,550],
+    'colsample_bytree': [0.75,0.8,0.85],
+    'max_depth': [None],
+    'reg_alpha': [1],
+    'reg_lambda': [2, 5, 10],
+    'subsample': [0.55, 0.6, .65],
+    'learning_rate':[0.5],
+    'gamma':[.5,1,2],
+    'min_child_weight':[0.01],
+    'sampling_method': ['uniform']
+}
+
+clf_xgb = GridSearchCV(xgb, param_grid = param_grid, cv = 5, verbose = True, n_jobs = -1)
+best_clf_xgb = clf_xgb.fit(x_train_scaled,y_train)
+clf_performance(best_clf_xgb,'XGB')
