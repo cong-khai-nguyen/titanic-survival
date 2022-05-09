@@ -11,7 +11,7 @@ https://www.kaggle.com/competitions/titanic/data?select=train.csv
 
 [Most Common Models for Classification 2](https://monkeylearn.com/blog/classification-algorithms/)
 
-[Standard Scaler Tutorial](https://www.youtube.com/watch?v=PiDfEo7qpcw&ab_channel=technologyCult)
+[Standard Scaler](https://www.youtube.com/watch?v=PiDfEo7qpcw&ab_channel=technologyCult)
 
 # Install and Run the Project
 This project requires to imported and installed libraries: pandas, numpy, seaborn, itertools, matplotlib, xgboost and scikit-learn.
